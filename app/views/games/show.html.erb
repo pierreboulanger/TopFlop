@@ -6,7 +6,7 @@
 <% if @game.top != nil %>
 
   <h3>Le Top est :</h3>
-  <%= game.top %>
+  <%= @game.top %>
 
 <% else %>
 
@@ -35,10 +35,11 @@
   <div id="top" class="display-none">
     <ul class="list-group no-ul-margin">
       <% @count_tops.each do |selected_top| %>
-        <li class="list-group-item text-center selected">
+        <li class="list-group-item text-center selected top">
           <%= selected_top[0].name %> - Vote : <%= selected_top[1] %>
         </li>
       <% end %>
+      <%= link_to "Cloturer le vote", team_game_path(@team, @game, top: @count_tops.first[0].id), method:"put", class:"btn btn-success btn-full-width" %>
     </ul>
   </div>
 
@@ -49,7 +50,7 @@
 <% if @game.flop != nil %>
 
   <h3>Le Flop est :</h3>
-  <%= game.flop %>
+  <%= @game.flop %>
 
 <% else %>
 
@@ -78,7 +79,7 @@
   <div id="top" class="display-none">
     <ul class="list-group no-ul-margin">
       <% @count_flops.each do |selected_flop| %>
-        <li class="list-group-item text-center selected">
+        <li class="list-group-item text-center selected flop">
           <%= selected_flop[0].name %> - Vote : <%= selected_flop[1] %>
         </li>
       <% end %>

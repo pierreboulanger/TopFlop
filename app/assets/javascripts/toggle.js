@@ -19,6 +19,10 @@
       $("#flop").toggle();
     });
 
+    $(".top:first-child").prepend("<i class='fa fa-star select-icon' aria-hidden='true'></i>");
+
+    $(".flop:first-child").prepend("<i class='fa fa-thumbs-o-down select-icon' aria-hidden='true'></i>");
+
 
   });
 

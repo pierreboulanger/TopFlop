@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
-  before_action :find_team, only: [:new, :create]
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
-  before_action :set_tops, :set_flops, :set_players, only: :show
+  before_action :find_team, only: [:show, :new, :create, :update]
+  before_action :set_game, :set_players, only: [:show, :edit, :update, :destroy]
+  before_action :set_tops, :set_flops, only: :show
 
   def index
   end
@@ -35,6 +35,15 @@ class GamesController < ApplicationController
   end
 
   def update
+    top_name = @players.find(params[:top]).name
+
+    if @game.update(top: top_name)
+      flash[:notice] = "Your game info was updated."
+      redirect_to team_game_path(@team, @game)
+    else
+      flash[:notice] = "Oops something went wrong."
+      render :show
+    end
   end
 
   def destroy
@@ -89,7 +98,6 @@ class GamesController < ApplicationController
 
     # Reverse in order to have most voted first
     @count_tops = @count_tops.sort_by {|k,v| v}.reverse
-
   end
 
   def final_flop
