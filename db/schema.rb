@@ -10,10 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125171442) do
+ActiveRecord::Schema.define(version: 20161127074402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "flops", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.string   "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_flops_on_game_id", using: :btree
+    t.index ["user_id"], name: "index_flops_on_user_id", using: :btree
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "team_id"
+    t.string   "opponent_name"
+    t.date     "date"
+    t.string   "score"
+    t.string   "top"
+    t.string   "flop"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["team_id"], name: "index_games_on_team_id", using: :btree
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tops", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.string   "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_tops_on_game_id", using: :btree
+    t.index ["user_id"], name: "index_tops_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -26,10 +64,22 @@ ActiveRecord::Schema.define(version: 20161125171442) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "shirt_number"
+    t.string   "field_position"
+    t.integer  "team_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
+  add_foreign_key "flops", "games"
+  add_foreign_key "flops", "users"
+  add_foreign_key "games", "teams"
+  add_foreign_key "tops", "games"
+  add_foreign_key "tops", "users"
+  add_foreign_key "users", "teams"
 end

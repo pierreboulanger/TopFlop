@@ -1,0 +1,37 @@
+.list-group-item:hover {
+  background: #eaeaea;
+}
+
+.no-ul-margin {
+  margin-bottom: 0;
+}
+
+.list-link:active {
+  text-decoration: none;
+}
+
+.game-list {
+  padding: 0;
+  display: flex;
+  height: 60px;
+}
+
+.game-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.game-date {
+  flex: 1;
+  border-right: 1px solid #ddd;
+}
+
+.game-title {
+  flex: 3;
+}
+
+#vote {
+  display: none;
+}

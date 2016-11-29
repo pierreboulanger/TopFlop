@@ -1,0 +1,13 @@
+<div class="text-center">
+  <h1>Choose your team !</h1>
+
+  <p>or <%= link_to "create one", new_team_path %> if yours is not there !</p>
+
+  <ul class="list-group">
+    <% @teams.each do |team| %>
+      <%= link_to team_path(team) do %>
+        <li class="list-group-item list-group-item-action"><%= team.name %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

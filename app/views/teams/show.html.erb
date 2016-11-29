@@ -1,0 +1,69 @@
+<div>
+  <!-- Tab Content -->
+  <div class="tab-content">
+
+    <!-- FIRST TAB -->
+    <div role="tabpanel" class="tab-pane fade in active" id="home">
+      <%= link_to "Add a Game", new_team_game_path(@team), class:"btn btn-primary btn-full-width"%>
+      <ul class="list-group">
+        <% @games.each do |game| %>
+          <%= link_to team_game_path(@team, game), class:"list-link" do %>
+            <li class="list-group-item game-list">
+              <div class="game-list-item game-date">
+                <%= game.date %>
+              </div>
+              <div class="game-list-item game-title">
+                <%= @team.name %> - <%= game.opponent_name %>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- SECOND TAB -->
+    <div role="tabpanel" class="tab-pane fade" id="profile">
+      History
+    </div>
+
+    <!-- THIRD TAB -->
+    <div role="tabpanel" class="tab-pane fade" id="messages">
+      <ul class="list-group">
+        <% @team.users.each do |user| %>
+          <%= link_to team_user_path(@team, user), class:"list-link" do %>
+            <li class="list-group-item game-list">
+              <div class="game-list-item game-title">
+                <%= user.first_name %> <%= user.last_name %>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- <div role="tabpanel" class="tab-pane" id="settings">...</div> -->
+  </div>
+
+
+
+
+
+
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-pills home_tabs nav-justified" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+        <i class="fa fa-futbol-o" aria-hidden="true"></i>
+        <p>Games</p>
+    </a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+      <i class="fa fa-history" aria-hidden="true"></i>
+      <p>History</p>
+    </a></li>
+    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+      <i class="fa fa-users" aria-hidden="true"></i>
+      <p>Team</p>
+    </a></li>
+    <!-- <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li> -->
+  </ul>
+</div>
