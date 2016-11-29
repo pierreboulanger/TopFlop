@@ -1,13 +1,9 @@
-<h1>Games#new</h1>
-<p>Find me in app/views/games/new.html.erb</p>
-
-
 <div class="text-center">
-  <h1>Create a new Game !</h1>
+  <h1>Donne ces infos sur le match</h1>
 
   <%= simple_form_for [@team, @game] do |f| %>
     <%= f.input :opponent_name %>
-    <%= f.input :date, as: :date %>
+    <%= f.input :date, as: :datepicker %>
     <%#= f.input :photos, as: :attachinary %>
     <%= f.button :submit, class:"btn btn-success btn-full-width" %>
   <% end %>
