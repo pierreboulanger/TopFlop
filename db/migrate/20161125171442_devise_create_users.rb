@@ -20,8 +20,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.inet     :last_sign_in_ip
 
       ## ADD for Player
-      t.string :first_name
-      t.string :last_name
+      t.string :name
       t.string :shirt_number
       t.string :field_position
       t.references :team, foreign_key: true

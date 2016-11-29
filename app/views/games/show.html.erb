@@ -18,7 +18,7 @@
     VOTE (<%= @tops.size %>)
   </button>
 
-  <div id="vote-top">
+  <div id="vote-top" class="display-none">
     <ul class="list-group no-ul-margin">
       <% @tops.each do |top| %>
         <li class="list-group-item text-center">
@@ -31,6 +31,16 @@
   <button id="top-button" class="btn btn-warning btn-full-width">
     DEVOILER LE TOP
   </button>
+
+  <div id="top" class="display-none">
+    <ul class="list-group no-ul-margin">
+      <% @count_tops.each do |selected_top| %>
+        <li class="list-group-item text-center selected">
+          <%= selected_top[0].name %> - Vote : <%= selected_top[1] %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
 <% end %>
 
@@ -51,7 +61,7 @@
     VOTE (<%= @flops.size %>)
   </button>
 
-  <div id="vote-flop">
+  <div id="vote-flop" class="display-none">
     <ul class="list-group no-ul-margin">
       <% @flops.each do |flop| %>
         <li class="list-group-item text-center">
@@ -63,8 +73,17 @@
 
   <button id="flop-button" class="btn btn-warning btn-full-width">
     DEVOILER LE FLOP
-</button>
+  </button>
 
+  <div id="top" class="display-none">
+    <ul class="list-group no-ul-margin">
+      <% @count_flops.each do |selected_flop| %>
+        <li class="list-group-item text-center selected">
+          <%= selected_flop[0].name %> - Vote : <%= selected_flop[1] %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
 <% end %>
 

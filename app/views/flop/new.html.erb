@@ -5,7 +5,7 @@
   <h1>Qui est le Flop selon toi ?</h1>
 
   <%= simple_form_for [@team, @game, @flop], url: team_game_flop_index_path(@team, @game) do |f| %>
-    <%= f.input :user_id, collection: @team.users, label_method: :first_name, value_method: :id,label: "Joueur", include_blank: false, selected: @flop.user_id %>
+    <%= f.input :user_id, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @flop.user_id %>
     <%= f.input :comment %>
     <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
     <%= f.button :submit, class:"btn btn-success btn-full-width" %>
