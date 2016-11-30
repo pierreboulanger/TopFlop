@@ -2,11 +2,11 @@
   <h2>Complète ton Profil</h2>
 
   <%= simple_form_for @user, :url => team_user_path(@team, @user) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :shirt_number %>
-    <%= f.input :field_position %>
-    <%= f.input :team_id, collection: @teams, label_method: :name, value_method: :id,label: "Team", include_blank: false, selected: @user.team_id %>
-    <p><%= link_to "Your Team is not in the list ? Create one !", new_team_path %></p>
+    <%= f.input :name, label: "Ton surnom dans l'équipe ?" %>
+    <%= f.input :shirt_number, label: "Ton maillot habituel ?" %>
+    <%= f.input :field_position, label: "Ta position fétiche ? (sur le terrain...)" %>
+    <%= f.input :team_id, collection: @teams, label_method: :name, value_method: :id,label: "Ton équipe ?", include_blank: false, selected: @user.team_id %>
+    <p><%= link_to "Ton équipe n'est pas dans la liste ? Crée la maintenant !", new_team_path %></p>
     <%#= f.input :photos, as: :attachinary %>
     <%= f.button :submit, "Continue", class:"btn btn-success btn-full-width" %>
   <% end %>
