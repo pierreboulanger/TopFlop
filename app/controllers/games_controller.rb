@@ -23,7 +23,7 @@ class GamesController < ApplicationController
     # @game.save
 
     if @game.save
-      flash[:notice] = "New game successfully created !!"
+      flash[:notice] = "Nouveau match créé !"
       redirect_to team_path(@team)
     else
       flash[:notice] = @game.errors.messages
@@ -37,11 +37,11 @@ class GamesController < ApplicationController
   def update
     top_name = @players.find(params[:top]).name
 
-    if @game.update(top: top_name)
-      flash[:notice] = "Your game info was updated."
+    if @game.update(top: top_name) || @game.update(flop: flop_name)
+      flash[:notice] = "Vote bien cloturé !"
       redirect_to team_game_path(@team, @game)
     else
-      flash[:notice] = "Oops something went wrong."
+      flash[:notice] = "Oops il y a un Bug !"
       render :show
     end
   end
@@ -106,7 +106,6 @@ class GamesController < ApplicationController
     @flops.each do |flop|
       flop_list << @players.find(flop.user_id)
     end
-
     # Sort the list with count
     @count_flops = flop_list.each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
 

@@ -8,7 +8,7 @@ class FlopController < ApplicationController
   def create
     @flop = Flop.new(flop_params)
     if @flop.save
-      flash[:notice] = "New flop successfully created !!"
+      flash[:notice] = "Merci pour ton vote !!"
       redirect_to team_game_path(@team, @game)
     else
       flash[:notice] = @flop.errors.messages
