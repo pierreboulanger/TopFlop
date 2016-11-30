@@ -4,7 +4,7 @@
 
     <!-- FIRST TAB -->
     <div role="tabpanel" class="tab-pane fade in active" id="home">
-      <%= link_to "Add a Game", new_team_game_path(@team), class:"btn btn-primary btn-full-width"%>
+      <%= link_to "Nouveau Match", new_team_game_path(@team), class:"btn btn-primary btn-full-width"%>
       <ul class="list-group">
         <% @games.each do |game| %>
           <%= link_to team_game_path(@team, game), class:"list-link" do %>
