@@ -10,7 +10,7 @@ Devise.setup do |config|
 
 
   # FACEBOOK CONNECT
-  config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"], scope: 'email', info_fields: 'email, first_name, last_name', image_size: 'square', secure_image_url: true
+  config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"], scope: 'email', info_fields: 'email', image_size: 'square', secure_image_url: true
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
