@@ -1,4 +1,12 @@
-<h2>Log in</h2>
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to "Connecte toi via #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class:"btn btn-primary btn-full-width" %><br />
+  <% end -%>
+<% end -%>
+
+<div class="text-center">
+  <h3>ou par email :</h3>
+</div>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
@@ -8,10 +16,12 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Log in", class:"btn btn-success btn-full-width" %>
+    <%= f.button :submit, "Connexion", class:"btn btn-success btn-full-width" %>
   </div>
 <% end %>
 
 <br>
 
-<%= render "devise/shared/links" %>
+<div class="text-center">
+  <%= render "devise/shared/links" %>
+</div>
