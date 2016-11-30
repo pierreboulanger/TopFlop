@@ -1,6 +1,5 @@
 <h1><%= @team.name %> - <%= @game.opponent_name %></h1>
 
-
 <!-- TOP PART -->
 
 <% if @game.top != nil %>
@@ -39,7 +38,9 @@
           <%= selected_top[0].name %> - Vote : <%= selected_top[1] %>
         </li>
       <% end %>
-      <%= link_to "Cloturer le vote", team_game_path(@team, @game, top: @count_tops.first[0].id), method:"put", class:"btn btn-success btn-full-width" %>
+      <% if @count_tops != [] %>
+        <%= link_to "Cloturer le vote", team_game_path(@team, @game, top: @count_tops.first[0].id), method:"put", class:"btn btn-success btn-full-width" %>
+      <% end %>
     </ul>
   </div>
 

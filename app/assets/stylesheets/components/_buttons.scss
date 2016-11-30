@@ -18,3 +18,33 @@
   justify-content: center;
   align-items: center;
 }
+
+.btn-medium {
+  color: black;
+  background: white;
+
+  border: 1px solid white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-weight: lighter;
+}
+.btn-medium:hover {
+  opacity: 0.7;
+  text-decoration: none;
+  color: black;
+}
+
+.connexion {
+  padding: 10px 20px;
+}
+
+#connexion-link {
+  color: #999999;
+  font-weight: lighter;
+  font-size: 15px;
+}
+
+.connextion a:hover {
+  text-decoration: none;
+  opacity: 0.7;
+}
