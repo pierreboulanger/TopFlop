@@ -1,4 +1,12 @@
-<h1><%=  %></h1>
-<%= current_user.inspect %>
+<div class="text-center">
+  <h1><%= @user.name %></h1>
+  <h3>N° maillot : <%= @user.shirt_number %></h3>
+  <h3>Position : <%= @user.field_position %></h3>
+</div>
 
-<%= link_to "Edit my Profile", edit_team_user_path(@team, current_user), class:"fixed-bottom btn btn-primary btn-full-width" %>
+<% if @user == current_user %>
+<%= link_to "Modifier mon Profil", edit_team_user_path(@team, current_user), class:"fixed-bottom btn btn-primary btn-full-width" %>
+<% end %>
+<div class="back fixed-bottom">
+  <%= link_to "Back", request.referer, class:"btn btn-danger btn-full-width" %>
+</div>

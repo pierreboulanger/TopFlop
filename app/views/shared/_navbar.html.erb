@@ -1,9 +1,22 @@
-<div class="navbar-wagon">
+<% if params[:controller] == "pages" %>
+  <div class="navbar-wagon-home">
+<% else %>
+  <div class="navbar-wagon">
+<% end %>
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <h1>TopFlop</h1>
-    <%#= image_tag "logo.png" %>
-  <% end %>
+  <div id="logo">
+    <% if params[:controller] == "pages" %>
+      <%= link_to root_path, class: "navbar-wagon-brand white" do %>
+        <h1>TopFlop</h1>
+        <%#= image_tag "logo.png" %>
+      <% end %>
+    <% else %>
+      <%= link_to root_path, class: "navbar-wagon-brand black" do %>
+        <h1>TopFlop</h1>
+        <%#= image_tag "logo.png" %>
+      <% end %>
+    <% end %>
+  </div>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
@@ -41,13 +54,16 @@
 
     <% else %>
 
+      <!-- Signup text link -->
+      <%= link_to t(".sign_in", default: "Je m'inscris !"), new_user_registration_path, class: "btn btn-medium" %>
+
       <!-- Login text link -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <div class="connexion text-center">
+        <%= link_to t(".sign_in", default: "connexion"), new_user_session_path, id: "connexion-link" %>
+      </div>
 
     <% end %>
 
-    <!-- Button (call-to-action) -->
-    <%= link_to t(".top_call_to_action", default: "Post stuff"), "#", class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 
   <!-- Different navigation if login or not -->
@@ -58,7 +74,11 @@
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item hidden-md hidden-lg">
         <div class="dropdown">
-          <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+        <% if params[:controller] == "pages" %>
+          <i class="fa fa-bars dropdown-toggle white" data-toggle="dropdown"></i>
+        <% else %>
+          <i class="fa fa-bars dropdown-toggle black" data-toggle="dropdown"></i>
+        <% end %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
             <% if current_user.team_id != nil %>
@@ -85,8 +105,28 @@
 
     <% else %>
 
-      <!-- Login text link -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+      <div class="navbar-wagon-item hidden-md hidden-lg">
+        <div class="dropdown">
+          <% if params[:controller] == "pages" %>
+            <i class="fa fa-bars dropdown-toggle white" data-toggle="dropdown"></i>
+          <% else %>
+            <i class="fa fa-bars dropdown-toggle black" data-toggle="dropdown"></i>
+          <% end %>
+          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+            <li>
+              <!-- Signup text link -->
+              <%= link_to t(".sign_in", default: "Je m'inscris !"), new_user_registration_path, class: "btn btn-medium" %>
+            </li>
+            <li>
+              <!-- Login text link -->
+              <div class="connexion text-center">
+                <%= link_to t(".sign_in", default: "connexion"), new_user_session_path, id: "connexion-link" %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
 
     <% end %>
 
