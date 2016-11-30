@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20161126161729) do
   create_table "games", force: :cascade do |t|
     t.integer  "team_id"
     t.string   "opponent_name"
-    t.date     "date"
+    t.string   "date"
     t.string   "score"
     t.string   "top"
     t.string   "flop"

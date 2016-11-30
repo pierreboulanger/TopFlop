@@ -2,10 +2,10 @@
   <h1>Donne ces infos sur le match</h1>
 
   <%= simple_form_for [@team, @game] do |f| %>
-    <%= f.input :opponent_name %>
+    <%= f.input :opponent_name, label: "Adversaire", placeholder: "FC Barcelone" %>
     <%= f.input :date, as: :string, input_html: { class: "datepicker" } %>
     <%#= f.input :photos, as: :attachinary %>
-    <%= f.button :submit, class:"btn btn-success btn-full-width" %>
+    <%= f.button :submit, "Sauver", class:"btn btn-success btn-full-width" %>
   <% end %>
 </div>
 

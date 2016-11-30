@@ -8,6 +8,6 @@
 
 
 Team.create([
-  { name: "Les Salons"},
+  { name: "Les Patrons"},
   { name: "Colo-Colo United"}
   ])
