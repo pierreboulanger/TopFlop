@@ -25,7 +25,7 @@
 
 
     $(function() {
-      $('input.datepicker').datepicker();
+      $('input.datepicker').datepicker({format: "dd/mm/yy"});
     });
   });
 
