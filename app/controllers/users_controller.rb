@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = "Your user info was updated."
-      redirect_to team_user_path(@team, @user)
+      redirect_to team_path(@team)
     else
       flash[:notice] = "Oops something went wrong."
       render :show
