@@ -23,9 +23,10 @@
 
     $(".flop:first-child").prepend("<i class='fa fa-thumbs-o-down select-icon' aria-hidden='true'></i>");
 
-
+    // DATEPICKER
     $(function() {
       $('input.datepicker').datepicker({format: "dd/mm/yy"});
     });
+
   });
 

@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :teams do
     resources :users
     resources :games do
-      resources :top
-      resources :flop
+      resources :top, only: [:new, :create, :edit, :update]
+      resources :flop, only: [:new, :create, :edit, :update]
     end
   end
 

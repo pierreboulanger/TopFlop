@@ -1,18 +1,30 @@
 class TopController < ApplicationController
-  before_action :set_team, :set_game
+  before_action :set_team, :set_game, :set_flop
 
   def new
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    puts "=> controller: top, action: NEW"
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @top = Top.new
   end
 
   def create
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    puts "=> controller: top, action: create"
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @top = Top.new(top_params)
+
     if @top.save
-      flash[:notice] = "New top successfully created !!"
-      redirect_to team_game_path(@team, @game)
+      respond_to do |format|
+        flash[:notice] = "Merci pour ton vote !!"
+        format.html { team_game_path(@team, @game) }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
     else
-      flash[:notice] = @top.errors.messages
-      render "new"
+      respond_to do |format|
+        format.html { render 'new' }
+        format.js  # <-- idem
+      end
     end
   end
 
@@ -30,6 +42,10 @@ class TopController < ApplicationController
 
   def set_game
     @game = Game.find(params["game_id"])
+  end
+
+  def set_flop
+    @flop = Flop.new
   end
 
   def top_params

@@ -2,17 +2,28 @@ class FlopController < ApplicationController
   before_action :set_team, :set_game
 
   def new
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    puts "=> controller : flop, action: new"
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @flop = Flop.new
   end
 
   def create
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    puts "=> controller : flop, action: create"
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @flop = Flop.new(flop_params)
     if @flop.save
-      flash[:notice] = "Merci pour ton vote !!"
-      redirect_to team_game_path(@team, @game)
+      respond_to do |format|
+        flash[:notice] = "Merci pour ton vote !!"
+        format.html { team_game_path(@team, @game) }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
     else
-      flash[:notice] = @flop.errors.messages
-      render "new"
+      respond_to do |format|
+        format.html { render 'new' }
+        format.js  # <-- idem
+      end
     end
   end
 
