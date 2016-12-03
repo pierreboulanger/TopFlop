@@ -9,9 +9,10 @@
 
 <% else %>
 
+  <%= link_to "FAIRE MES CHOIX !", new_team_game_top_path(@team, @game), class:"btn btn-primary btn-full-width" %>
+
   <h3>Le Top n'a pas encore été élu !</h3>
   <!-- A FAIRE : CHECKER SI USER A DEJA VOTER -->
-  <%= link_to "Je choisis mon top !", new_team_game_top_path(@team, @game), class:"btn btn-primary btn-full-width" %>
 
   <button id="vote-top-button" class="btn btn-success btn-full-width">
     VOTE (<%= @tops.size %>)
@@ -56,8 +57,6 @@
 <% else %>
 
   <h3>Le Flop n'a pas encore été élu !</h3>
-  <%= link_to "Je choisis mon flop !", new_team_game_flop_path(@team, @game), class:"btn btn-primary btn-full-width" %>
-
 
   <button id="vote-flop-button" class="btn btn-success btn-full-width">
     VOTE (<%= @flops.size %>)

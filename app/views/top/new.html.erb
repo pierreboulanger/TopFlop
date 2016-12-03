@@ -1,14 +1,34 @@
 <div class="text-center">
-  <h1>Qui est le Top selon toi ?</h1>
+  <h1 class="vote-h1">Qui est le Top selon toi ?</h1>
 
-  <%= simple_form_for [@team, @game, @top], url: team_game_top_index_path(@team, @game) do |f| %>
-    <%= f.input :user_id, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @top.user_id %>
-    <%= f.input :comment %>
-    <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
-    <%= f.button :submit, class:"btn btn-success btn-full-width" %>
-  <% end %>
+  <div class="top-form">
+    <%= simple_form_for [@team, @game, @top], url: team_game_top_index_path(@team, @game), remote: true do |f| %>
+      <%= f.input :user_id, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @top.user_id %>
+      <%= f.input :comment %>
+      <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
+    <% end %>
+
+    <%= link_to "Voter", "#", class:"top_button_submit btn btn-success btn-full-width" %>
+  </div>
+
+  <div class="top-after-vote"></div>
+
+  <h1>Qui est le Flop selon toi ?</h1>
+
+  <div class="flop-form">
+    <%= simple_form_for [@team, @game, @flop], url: team_game_flop_index_path(@team, @game), remote: true do |f| %>
+      <%= f.input :user_id, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @flop.user_id %>
+      <%= f.input :comment %>
+      <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
+    <% end %>
+
+    <%= link_to "Voter", "#", class:"flop_button_submit btn btn-success btn-full-width" %>
+  </div>
+
+  <div class="flop-after-vote"></div>
 </div>
 
-<div class="back fixed-bottom">
-  <%= link_to "Back", request.referer, class:"btn btn-danger btn-full-width" %>
+<div class="fixed-bottom">
+  <%= link_to "Je confirme mon vote !", team_game_path(@team, @game), class:"button_submit btn btn-success btn-full-width" %>
 </div>
+
