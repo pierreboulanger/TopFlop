@@ -8,7 +8,7 @@
       <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
     <% end %>
 
-    <%= link_to "Voter", "#", class:"top_button_submit btn btn-success btn-full-width" %>
+    <%= link_to "Confirmer Vote Top", "#", class:"top_button_submit btn btn-success btn-full-width" %>
   </div>
 
   <div class="top-after-vote"></div>
@@ -22,13 +22,13 @@
       <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
     <% end %>
 
-    <%= link_to "Voter", "#", class:"flop_button_submit btn btn-success btn-full-width" %>
+    <%= link_to "Confirmer Vote Flop", "#", class:"flop_button_submit btn btn-success btn-full-width" %>
   </div>
 
   <div class="flop-after-vote"></div>
 </div>
 
 <div class="fixed-bottom">
-  <%= link_to "Je confirme mon vote !", team_game_path(@team, @game), class:"button_submit btn btn-success btn-full-width" %>
+  <%= link_to "Je confirme mon vote !", team_game_path(@team, @game), class:"button_submit btn btn-success btn-full-width", data: {confirm: "Avez-vous bien voté pour un top et pour un flop ?"} %>
 </div>
 

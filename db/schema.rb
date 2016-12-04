@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20161130140146) do
     t.string   "score"
     t.string   "top"
     t.string   "flop"
+    t.string   "open"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["team_id"], name: "index_games_on_team_id", using: :btree
