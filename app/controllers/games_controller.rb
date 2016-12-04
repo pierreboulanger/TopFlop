@@ -35,15 +35,49 @@ class GamesController < ApplicationController
   end
 
   def update
-    top_name = @players.find(params[:top]).name
 
-    if @game.update(top: top_name) || @game.update(flop: flop_name)
-      flash[:notice] = "Vote bien cloturé !"
-      redirect_to team_game_path(@team, @game)
-    else
-      flash[:notice] = "Oops il y a un Bug !"
-      render :show
+    # OPEN VOTE
+    if params[:open] != nil
+      if @game.update(open: params[:open])
+        flash[:notice] = "Les votes sont lancés !"
+        redirect_to team_game_path(@team, @game)
+      else
+        flash[:notice] = "Oops il y a un Bug !"
+        render :show
+      end
     end
+
+    # UPDATE TOP
+    if params[:top] != nil && params[:flop] != nil
+      top_name = @players.find(params[:top]).name
+      flop_name = @players.find(params[:flop]).name
+
+      if @game.update(top: top_name)
+        if @game.update(flop: flop_name)
+          flash[:notice] = "Vote bien cloturé !"
+          redirect_to team_game_path(@team, @game)
+        else
+          flash[:notice] = "Oops il y a un Bug avec le Flop !"
+          render :show
+        end
+      else
+        flash[:notice] = "Oops il y a un Bug avec le Top !"
+        render :show
+      end
+    end
+
+    # UPDATE FLOP
+    # if params[:flop] != nil
+    #   flop_name = @players.find(params[:flop]).name
+    #   if @game.update(flop: flop_name)
+    #     flash[:notice] = "Vote bien cloturé !"
+    #     redirect_to team_game_path(@team, @game)
+    #   else
+    #     flash[:notice] = "Oops il y a un Bug !"
+    #     render :show
+    #   end
+    # end
+
   end
 
   def destroy
@@ -79,7 +113,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:opponent_name, :date)
+    params.require(:game).permit(:opponent_name, :date, :open)
   end
 
 

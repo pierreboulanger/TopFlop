@@ -19,9 +19,23 @@
   align-items: center;
 }
 
-.btn-facebook {
+a.btn-facebook {
   background-color: #3b5998;
   border-color: #3b5998;
+  border-radius: 50px;
+  width: 50%;
+  height: 4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+a.btn-facebook:hover {
+  background-color: #21345d;
+  border-color: #3b5998;
+  color: white;
+  text-decoration: none;
 }
 
 .btn-medium {
