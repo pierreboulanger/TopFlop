@@ -44,6 +44,6 @@ class FlopController < ApplicationController
   end
 
   def flop_params
-    params.require(:flop).permit(:game_id, :user_id, :comment)
+    params.require(:flop).permit(:game_id, :user_id, :flopplayer, :comment)
   end
 end

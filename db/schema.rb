@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130140146) do
+ActiveRecord::Schema.define(version: 20161205123434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20161130140146) do
   create_table "flops", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "user_id"
+    t.string   "flopplayer"
     t.string   "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20161130140146) do
   create_table "tops", force: :cascade do |t|
     t.integer  "game_id"
     t.integer  "user_id"
+    t.string   "topplayer"
     t.string   "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -81,10 +83,24 @@ ActiveRecord::Schema.define(version: 20161130140146) do
     t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
+  create_table "uservotes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "top_id"
+    t.integer  "flop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flop_id"], name: "index_uservotes_on_flop_id", using: :btree
+    t.index ["top_id"], name: "index_uservotes_on_top_id", using: :btree
+    t.index ["user_id"], name: "index_uservotes_on_user_id", using: :btree
+  end
+
   add_foreign_key "flops", "games"
   add_foreign_key "flops", "users"
   add_foreign_key "games", "teams"
   add_foreign_key "tops", "games"
   add_foreign_key "tops", "users"
   add_foreign_key "users", "teams"
+  add_foreign_key "uservotes", "flops"
+  add_foreign_key "uservotes", "tops"
+  add_foreign_key "uservotes", "users"
 end
