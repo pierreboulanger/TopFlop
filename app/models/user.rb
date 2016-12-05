@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  has_many :flops, dependent: :destroy
-  has_many :tops, dependent: :destroy
+  has_many :flops
+  has_many :tops
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

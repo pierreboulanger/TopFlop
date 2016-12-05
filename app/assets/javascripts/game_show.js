@@ -1,12 +1,5 @@
 $(document).ready(function () {
 
-  // STARTING THE VOTING PROCESS
-  $("#start-choices-button").click(function() {
-    $(".topflop-choices").toggle();
-    $("#start-choices-button").hide();
-  });
-
-
   // VOTE
   $("#vote-top-button").click(function() {
     $("#vote-top").toggle();

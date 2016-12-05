@@ -4,36 +4,29 @@
   <%= link_to "LANCER LES VOTES", team_game_path(@team, @game, open: "true"), method:"put", class:"btn btn-warning btn-full-width", id:"start-choices-button", data: {confirm: "Attention vous ne pouvez lancer les votes qu'une fois le match fini ! Cliquez sur OK uniquement si votre match est fini"} %>
 <% else %>
 
-  <!-- TOP PART -->
-
-  <% if @game.top != nil %>
-
-    <h3>Le Top est :</h3>
-    <%= @game.top %>
-
-  <% else %>
-
-    <%= link_to "FAIRE MES CHOIX !", new_team_game_top_path(@team, @game), class:"btn btn-primary btn-full-width" %>
-
-    <h3>Le Top n'a pas encore été élu !</h3>
-    <!-- A FAIRE : CHECKER SI USER A DEJA VOTER -->
+  <% if @game.top != nil && @game.flop != nil %>
 
     <button id="vote-top-button" class="btn btn-success btn-full-width">
-      VOTE (<%= @tops.size %>)
+      MONTRER LES VOTES (<%= @comments.size %>)
     </button>
 
     <div id="vote-top" class="display-none">
       <ul class="list-group no-ul-margin">
-        <% @tops.each do |top| %>
+        <% @comments.each do |comment| %>
           <li class="list-group-item text-center">
-            <%= top.comment %>
+            <em>TOP :</em> <%= comment[0].comment %>
+            <br>
+            <em>FLOP :</em> <%= comment[1].comment %>
           </li>
         <% end %>
       </ul>
     </div>
 
+    <br>
+    <br>
+
     <button id="top-button" class="btn btn-warning btn-full-width">
-      DEVOILER LES COMMENTAIRES
+      DEVOILER LE TOP
     </button>
 
     <div id="top" class="display-none">
@@ -41,33 +34,6 @@
         <% @count_tops.each do |selected_top| %>
           <li class="list-group-item text-center selected top">
             <%= selected_top[0].name %> - Vote : <%= selected_top[1] %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-
-  <% end %>
-
-  <!-- FLOP PART -->
-
-  <% if @game.flop != nil %>
-
-    <h3>Le Flop est :</h3>
-    <%= @game.flop %>
-
-  <% else %>
-
-    <h3>Le Flop n'a pas encore été élu !</h3>
-
-    <button id="vote-flop-button" class="btn btn-success btn-full-width">
-      VOTE (<%= @flops.size %>)
-    </button>
-
-    <div id="vote-flop" class="display-none">
-      <ul class="list-group no-ul-margin">
-        <% @flops.each do |flop| %>
-          <li class="list-group-item text-center">
-            <%= flop.comment %>
           </li>
         <% end %>
       </ul>
@@ -87,13 +53,34 @@
       </ul>
     </div>
 
+  <% else %>
+
+    <h3>Première étape : </h3>
+
+    <% if @voted == false %>
+
+      <%= link_to "FAIRE MES CHOIX !", new_team_game_top_path(@team, @game), class:"btn btn-primary btn-full-width" %>
+
+    <% else %>
+
+      <p>Merci pour ton vote !</p>
+      <%= link_to "J'ai mal fait mes choix", new_team_game_top_path(@team, @game), class:"backdoor-link" %>
+
+    <% end %>
+
+    <% if @count_tops != [] && @count_flops != [] %>
+      <h3>Prochaine étape : </h3>
+      <h4>Tous le monde a voté ? Alors...</h4>
+      <%= link_to "Cloturer le vote", team_game_path(@team, @game, top: @count_tops.first[0].id, flop: @count_flops.first[0].id), method:"put", class:"btn btn-success btn-full-width", data: {confirm: "Etes-vous certain de vouloir cloturer les votes ?"} %>
+    <% end %>
+
   <% end %>
 <% end %>
 
-<% if @count_tops != [] && @count_flops != [] %>
-  <%= link_to "Cloturer le vote", team_game_path(@team, @game, top: @count_tops.first[0].id, flop: @count_flops.first[0].id), method:"put", class:"btn btn-success btn-full-width" %>
-<% end %>
 
+
+
+<br>
 <div class="back fixed-bottom">
   <%= link_to "Back", team_path(@team), class:"btn btn-danger btn-full-width" %>
 </div>

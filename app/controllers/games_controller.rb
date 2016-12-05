@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_action :find_team, only: [:show, :new, :create, :update]
   before_action :set_game, :set_players, only: [:show, :edit, :update, :destroy]
-  before_action :set_tops, :set_flops, only: :show
+  before_action :set_comments, only: :show
 
   def index
   end
@@ -9,6 +9,7 @@ class GamesController < ApplicationController
   def show
     final_top
     final_flop
+    has_voted
   end
 
   def new
@@ -107,6 +108,25 @@ class GamesController < ApplicationController
     @flops = @game.flops
   end
 
+  def set_comments
+    set_game
+    set_tops
+    set_flops
+    @comments = []
+
+    @comments = @tops.zip(@flops)
+  end
+
+  def set_tops
+    set_game
+    @tops = @game.tops
+  end
+
+  def set_flops
+    set_game
+    @flops = @game.flops
+  end
+
   def set_players
     find_team
     @players = @team.users
@@ -145,6 +165,21 @@ class GamesController < ApplicationController
 
     # Reverse in order to have most voted first
     @count_flops = @count_flops.sort_by {|k,v| v}.reverse
+  end
+
+  # USER HAS VOTED ??
+
+  def has_voted
+    @voted = false
+
+    current_user.tops.each do |top|
+      if top.game_id == @game.id
+        @voted = true
+        break
+      else
+        @voted = false
+      end
+    end
   end
 
 end

@@ -1,29 +1,51 @@
 <div class="text-center">
   <h1 class="vote-h1">Qui est le Top selon toi ?</h1>
 
-  <div class="top-form">
-    <%= simple_form_for [@team, @game, @top], url: team_game_top_index_path(@team, @game), remote: true do |f| %>
-      <%= f.input :user_id, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @top.user_id %>
-      <%= f.input :comment %>
-      <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
-    <% end %>
+  <% if @voted_top_player %>
 
-    <%= link_to "Confirmer Vote Top", "#", class:"top_button_submit btn btn-success btn-full-width" %>
-  </div>
+    <div class="text-center">
+      Vote enregistré
+    </div>
+
+  <% else %>
+
+    <div class="top-form">
+      <%= simple_form_for [@team, @game, @top], url: team_game_top_index_path(@team, @game), remote: true do |f| %>
+        <%= f.input :topplayer, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @top.topplayer %>
+        <%= f.input :comment %>
+        <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
+        <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+      <% end %>
+
+      <%= link_to "Confirmer Vote Top", "#", class:"top_button_submit btn btn-success btn-full-width" %>
+    </div>
+
+  <% end %>
 
   <div class="top-after-vote"></div>
 
   <h1>Qui est le Flop selon toi ?</h1>
 
+  <% if @voted_flop_player %>
+
+    <div class="text-center">
+      Vote enregistré
+    </div>
+
+  <% else %>
+
   <div class="flop-form">
     <%= simple_form_for [@team, @game, @flop], url: team_game_flop_index_path(@team, @game), remote: true do |f| %>
-      <%= f.input :user_id, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @flop.user_id %>
+      <%= f.input :flopplayer, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @flop.flopplayer %>
       <%= f.input :comment %>
       <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
+      <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
     <% end %>
 
     <%= link_to "Confirmer Vote Flop", "#", class:"flop_button_submit btn btn-success btn-full-width" %>
   </div>
+
+  <% end %>
 
   <div class="flop-after-vote"></div>
 </div>
