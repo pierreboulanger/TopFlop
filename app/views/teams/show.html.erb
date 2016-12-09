@@ -35,7 +35,7 @@
           <%= link_to team_user_path(@team, user), class:"list-link" do %>
             <li class="list-group-item game-list">
               <div class="game-list-item game-title">
-                <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+                <% avatar_url = user.facebook_picture_url || "http://placehold.it/30x30" %>
                 <%= image_tag avatar_url, class: "avatar" %>
                 <div class="player-list-name">
                   <%= user.name.upcase %>
