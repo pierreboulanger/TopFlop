@@ -144,7 +144,7 @@ class GamesController < ApplicationController
 
     # Get all the user selected for top
     @tops.each do |top|
-      top_list << @players.find(top.user_id)
+      top_list << @players.find(top.topplayer)
     end
 
     # Sort the list with count
@@ -158,7 +158,7 @@ class GamesController < ApplicationController
     flop_list = []
 
     @flops.each do |flop|
-      flop_list << @players.find(flop.user_id)
+      flop_list << @players.find(flop.flopplayer)
     end
     # Sort the list with count
     @count_flops = flop_list.each_with_object(Hash.new(0)) { |o, h| h[o] += 1 }
