@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if @team.save
-      flash[:notice] = "New team successfully created !!"
+      flash[:notice] = "Nouvelle team créée !!"
       redirect_to edit_team_user_path(@team, current_user)
     else
       flash[:notice] = @team.errors.messages

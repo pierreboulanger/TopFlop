@@ -10,6 +10,11 @@
   text-decoration: none;
 }
 
+.game-list-ul {
+  padding-left: 0;
+
+}
+
 .game-list {
   padding: 0;
   display: flex;
@@ -42,4 +47,17 @@
   border-radius: 10px;
   color: white;
   font-size: 22px;
+}
+
+.player-list-name {
+  color: black;
+  font-weight: bold;
+  margin: 15px;
+  font-family: raleway;
+}
+
+#game-list-link {
+  color: black;
+  font-weight: 100;
+  font-size: 23px;
 }

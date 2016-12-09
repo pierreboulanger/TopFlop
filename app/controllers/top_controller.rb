@@ -1,5 +1,6 @@
 class TopController < ApplicationController
   before_action :set_team, :set_game, :set_flop, :has_voted_top_player, :has_voted_flop_player
+  before_action :set_top_and_flop, only: [:edit, :update]
 
   def new
     puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
@@ -34,6 +35,19 @@ class TopController < ApplicationController
   end
 
   def update
+    if @top.update(top_params)
+      respond_to do |format|
+        flash[:notice] = "Vote modifié !"
+        format.html { team_game_path(@team, @game) }
+        format.js  # <-- will render `app/views/reviews/update.js.erb`
+      end
+    else
+      respond_to do |format|
+        flash[:notice] = "Oops something went wrong."
+        format.html { render 'show' }
+        format.js  # <-- idem
+      end
+    end
   end
 
   private
@@ -82,6 +96,13 @@ class TopController < ApplicationController
         @voted_flop_player = false
       end
     end
+  end
+
+  # EDIT AND UPDATE !!!
+
+  def set_top_and_flop
+    @top = current_user.tops.last
+    @flop = current_user.flops.last
   end
 
 end
