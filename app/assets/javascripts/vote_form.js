@@ -10,11 +10,16 @@ $(document).ready(function () {
         $(".top_comment").append("<p class='validation validation_top_comment'>Donne un commentaire !</p>");
         $("input#top_comment").focus();
         $('.top_button_submit').prop('disabled', true);
+        console.log('log');
       }
       if (top_comment != "") {
+        console.log('ok !');
         $(".validation_top_comment").remove();
         $('.top_button_submit').prop('disabled', false);
+        // if new top
         $("#new_top").trigger("submit");
+        // if edit top
+        $("#edit_top_1").trigger("submit");
         console.log("top done");
       }
 
@@ -34,7 +39,10 @@ $(document).ready(function () {
       if (flop_comment != "") {
         $(".validation_flop_comment").remove();
         $('.flop_button_submit').prop('disabled', false);
+        // if new flop
         $("#new_flop").trigger("submit");
+        // if edit flop
+        $("#edit_flop_1").trigger("submit");
         console.log("flop done");
       }
     });

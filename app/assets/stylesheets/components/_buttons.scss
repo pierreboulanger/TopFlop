@@ -67,3 +67,9 @@ a.btn-facebook:hover {
   text-decoration: none;
   opacity: 0.7;
 }
+
+.bottom-fixed-game-btn {
+  display: flex;
+  position: fixed;
+  bottom: 75px;
+}

@@ -4,10 +4,9 @@
 
     <!-- FIRST TAB -->
     <div role="tabpanel" class="tab-pane fade in active" id="home">
-      <%= link_to "Nouveau Match", new_team_game_path(@team), class:"btn btn-primary btn-full-width"%>
-      <ul class="list-group">
+      <ul class="game-list-ul">
         <% @games.each do |game| %>
-          <%= link_to team_game_path(@team, game), class:"list-link" do %>
+          <%= link_to team_game_path(@team, game), class:"list-link", id:"game-list-link" do %>
             <li class="list-group-item game-list">
               <div class="game-list-item game-date">
                 <%= game.date %>
@@ -19,6 +18,7 @@
           <% end %>
         <% end %>
       </ul>
+      <%= link_to "Nouveau Match", new_team_game_path(@team), class:"btn btn-warning bottom-fixed-game-btn btn-full-width"%>
     </div>
 
     <!-- SECOND TAB -->
@@ -35,7 +35,11 @@
           <%= link_to team_user_path(@team, user), class:"list-link" do %>
             <li class="list-group-item game-list">
               <div class="game-list-item game-title">
-                <%= user.name %>
+                <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+                <%= image_tag avatar_url, class: "avatar" %>
+                <div class="player-list-name">
+                  <%= user.name.upcase %>
+                </div>
               </div>
             </li>
           <% end %>

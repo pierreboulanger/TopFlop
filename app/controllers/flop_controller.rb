@@ -1,5 +1,6 @@
 class FlopController < ApplicationController
   before_action :set_team, :set_game
+  before_action :set_flop, only: [:edit, :update]
 
   def new
     puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
@@ -31,6 +32,19 @@ class FlopController < ApplicationController
   end
 
   def update
+    if @flop.update(flop_params)
+      respond_to do |format|
+        flash[:notice] = "Vote modifié !"
+        format.html { team_game_path(@team, @game) }
+        format.js  # <-- will render `app/views/reviews/update.js.erb`
+      end
+    else
+      respond_to do |format|
+        flash[:notice] = "Oops something went wrong."
+        format.html { render 'show' }
+        format.js  # <-- idem
+      end
+    end
   end
 
   private
@@ -45,5 +59,9 @@ class FlopController < ApplicationController
 
   def flop_params
     params.require(:flop).permit(:game_id, :user_id, :flopplayer, :comment)
+  end
+
+  def set_flop
+    @flop = current_user.flops.last
   end
 end
