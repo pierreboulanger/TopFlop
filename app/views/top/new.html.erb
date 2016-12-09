@@ -10,7 +10,7 @@
   <% else %>
 
     <div class="top-form">
-      <%= simple_form_for [@team, @game, @top], url: edit_team_game_top_path(@team, @game), remote: true do |f| %>
+      <%= simple_form_for [@team, @game, @top], url: team_game_top_index_path(@team, @game), remote: true do |f| %>
         <%= f.input :topplayer, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @top.topplayer %>
         <%= f.input :comment %>
         <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>

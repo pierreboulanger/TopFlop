@@ -19,7 +19,7 @@ $(document).ready(function () {
         // if new top
         $("#new_top").trigger("submit");
         // if edit top
-        $("#edit_top_1").trigger("submit");
+        $(".edit_top").trigger("submit");
         console.log("top done");
       }
 
@@ -42,7 +42,7 @@ $(document).ready(function () {
         // if new flop
         $("#new_flop").trigger("submit");
         // if edit flop
-        $("#edit_flop_1").trigger("submit");
+        $(".edit_flop").trigger("submit");
         console.log("flop done");
       }
     });
