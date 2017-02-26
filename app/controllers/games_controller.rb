@@ -10,6 +10,7 @@ class GamesController < ApplicationController
     final_top
     final_flop
     has_voted
+    raise
   end
 
   def new
@@ -115,16 +116,7 @@ class GamesController < ApplicationController
     @comments = []
 
     @comments = @tops.zip(@flops)
-  end
-
-  def set_tops
-    set_game
-    @tops = @game.tops
-  end
-
-  def set_flops
-    set_game
-    @flops = @game.flops
+    raise
   end
 
   def set_players
@@ -135,7 +127,6 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:opponent_name, :date, :open)
   end
-
 
   # FINAL COUNT TOP and FLOP METHOD
 

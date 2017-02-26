@@ -3,16 +3,10 @@ class TopController < ApplicationController
   before_action :set_top_and_flop, only: [:edit, :update]
 
   def new
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts "=> controller: top, action: NEW"
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @top = Top.new
   end
 
   def create
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts "=> controller: top, action: create"
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @top = Top.new(top_params)
 
     if @top.save
@@ -98,7 +92,8 @@ class TopController < ApplicationController
     end
   end
 
-  # EDIT AND UPDATE !!!
+
+  # FOR EDIT AND UPDATE !!!
 
   def set_top_and_flop
     @top = current_user.tops.last
