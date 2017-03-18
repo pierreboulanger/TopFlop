@@ -10,7 +10,6 @@ class GamesController < ApplicationController
     final_top
     final_flop
     has_voted
-    raise
   end
 
   def new
@@ -25,7 +24,6 @@ class GamesController < ApplicationController
     # @game.save
 
     if @game.save
-      flash[:notice] = "Nouveau match créé !"
       redirect_to team_path(@team)
     else
       flash[:notice] = @game.errors.messages
@@ -56,7 +54,6 @@ class GamesController < ApplicationController
 
       if @game.update(top: top_name)
         if @game.update(flop: flop_name)
-          flash[:notice] = "Vote bien cloturé !"
           redirect_to team_game_path(@team, @game)
         else
           flash[:notice] = "Oops il y a un Bug avec le Flop !"
@@ -116,7 +113,6 @@ class GamesController < ApplicationController
     @comments = []
 
     @comments = @tops.zip(@flops)
-    raise
   end
 
   def set_players

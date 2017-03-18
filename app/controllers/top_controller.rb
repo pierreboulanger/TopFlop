@@ -12,7 +12,6 @@ class TopController < ApplicationController
     if @top.save
       respond_to do |format|
         # @uservote = Uservote.new(user_id: current_user.id, top_id: @top.id)
-        flash[:notice] = "Merci pour ton vote !!"
         format.html { team_game_path(@team, @game) }
         format.js  # <-- will render `app/views/reviews/create.js.erb`
       end

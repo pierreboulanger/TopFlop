@@ -20,10 +20,11 @@
 }
 
 a.btn-facebook {
+  margin: 0 auto;
+  width: inherit;
   background-color: #3b5998;
   border-color: #3b5998;
   border-radius: 50px;
-  width: 50%;
   height: 4em;
   display: flex;
   justify-content: center;
