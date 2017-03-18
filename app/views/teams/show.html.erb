@@ -5,7 +5,7 @@
     <!-- FIRST TAB -->
     <div role="tabpanel" class="tab-pane fade in active" id="home">
       <ul class="game-list-ul">
-        <% @games.each do |game| %>
+        <% @games.reverse_each do |game| %>
           <%= link_to team_game_path(@team, game), class:"list-link", id:"game-list-link" do %>
             <li class="list-group-item game-list">
               <div class="game-list-item game-date">

@@ -3,22 +3,15 @@ class TopController < ApplicationController
   before_action :set_top_and_flop, only: [:edit, :update]
 
   def new
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts "=> controller: top, action: NEW"
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @top = Top.new
   end
 
   def create
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts "=> controller: top, action: create"
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @top = Top.new(top_params)
 
     if @top.save
       respond_to do |format|
         # @uservote = Uservote.new(user_id: current_user.id, top_id: @top.id)
-        flash[:notice] = "Merci pour ton vote !!"
         format.html { team_game_path(@team, @game) }
         format.js  # <-- will render `app/views/reviews/create.js.erb`
       end
@@ -98,7 +91,8 @@ class TopController < ApplicationController
     end
   end
 
-  # EDIT AND UPDATE !!!
+
+  # FOR EDIT AND UPDATE !!!
 
   def set_top_and_flop
     @top = current_user.tops.last

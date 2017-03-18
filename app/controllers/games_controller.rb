@@ -24,7 +24,6 @@ class GamesController < ApplicationController
     # @game.save
 
     if @game.save
-      flash[:notice] = "Nouveau match créé !"
       redirect_to team_path(@team)
     else
       flash[:notice] = @game.errors.messages
@@ -55,7 +54,6 @@ class GamesController < ApplicationController
 
       if @game.update(top: top_name)
         if @game.update(flop: flop_name)
-          flash[:notice] = "Vote bien cloturé !"
           redirect_to team_game_path(@team, @game)
         else
           flash[:notice] = "Oops il y a un Bug avec le Flop !"
@@ -117,16 +115,6 @@ class GamesController < ApplicationController
     @comments = @tops.zip(@flops)
   end
 
-  def set_tops
-    set_game
-    @tops = @game.tops
-  end
-
-  def set_flops
-    set_game
-    @flops = @game.flops
-  end
-
   def set_players
     find_team
     @players = @team.users
@@ -135,7 +123,6 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:opponent_name, :date, :open)
   end
-
 
   # FINAL COUNT TOP and FLOP METHOD
 

@@ -72,7 +72,7 @@
   <% if @count_tops != [] && @count_flops != [] %>
   <h3>Prochaine étape : </h3>
   <h4>Tous le monde a voté ? Alors...</h4>
-  <%= link_to "Cloturer le vote", team_game_path(@team, @game, top: @count_tops.first[0].id, flop: @count_flops.first[0].id), method:"put", class:"btn btn-success btn-full-width", data: {confirm: "Etes-vous certain de vouloir cloturer les votes ?"} %>
+  <%= link_to "Cloturer les votes (#{@comments.size})", team_game_path(@team, @game, top: @count_tops.first[0].id, flop: @count_flops.first[0].id), method:"put", class:"btn btn-success btn-full-width", data: {confirm: "Etes-vous certain de vouloir cloturer les votes ?"} %>
   <% end %>
 
   <% end %>
