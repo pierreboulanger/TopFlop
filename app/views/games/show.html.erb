@@ -15,9 +15,9 @@
     <ul class="list-group no-ul-margin">
       <% @comments.each do |comment| %>
       <li class="list-group-item text-center">
-        <em>TOP :</em> <%= comment[0].comment %>
+        <em>TOP :</em> <%= comment[0].comment %> (<%= User.find(comment[0].topplayer).name %>)
         <br>
-        <em>FLOP :</em> <%= comment[1].comment %>
+        <em>FLOP :</em> <%= comment[1].comment %> (<%= User.find(comment[1].flopplayer).name %>)
       </li>
       <% end %>
     </ul>
