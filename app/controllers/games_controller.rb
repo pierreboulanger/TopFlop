@@ -97,22 +97,29 @@ class GamesController < ApplicationController
   end
 
   def set_tops
-    set_game
     @tops = @game.tops
   end
 
   def set_flops
-    set_game
     @flops = @game.flops
   end
 
   def set_comments
-    set_game
-    set_tops
-    set_flops
     @comments = []
 
-    @comments = @tops.zip(@flops)
+    set_tops
+    set_flops
+
+    @players.each do |player|
+      player_id = player.id
+
+      player_flop = @flops.find_by user_id: player_id
+      player_top = @tops.find_by user_id: player_id
+
+      @comments << [player_top, player_flop]
+    end
+
+    @comments
   end
 
   def set_players
