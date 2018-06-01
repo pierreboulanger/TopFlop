@@ -1,4 +1,4 @@
-class TopController < ApplicationController
+class TopsController < ApplicationController
   before_action :set_team, :set_game, :set_flop, :has_voted_top_player, :has_voted_flop_player
   before_action :set_top_and_flop, only: [:edit, :update]
 

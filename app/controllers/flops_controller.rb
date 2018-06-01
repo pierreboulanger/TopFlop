@@ -1,18 +1,12 @@
-class FlopController < ApplicationController
+class FlopsController < ApplicationController
   before_action :set_team, :set_game
   before_action :set_flop, only: [:edit, :update]
 
   def new
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts "=> controller : flop, action: new"
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @flop = Flop.new
   end
 
   def create
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts "=> controller : flop, action: create"
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     @flop = Flop.new(flop_params)
     if @flop.save
       respond_to do |format|
