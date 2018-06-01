@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_action :find_team, only: [:show, :new, :create, :update]
   before_action :set_game, :set_players, only: [:show, :edit, :update, :destroy]
-  before_action :set_comments, only: :show
+  before_action :set_comments, :set_non_responders, only: :show
 
   def index
   end
@@ -37,8 +37,8 @@ class GamesController < ApplicationController
   def update
 
     # OPEN VOTE
-    if params[:open] != nil
-      if @game.update(open: params[:open])
+    if params[:status] != nil
+      if @game.update(status: params[:status])
         flash[:notice] = "Les votes sont lancés !"
         redirect_to team_game_path(@team, @game)
       else
@@ -111,15 +111,22 @@ class GamesController < ApplicationController
     set_flops
 
     @players.each do |player|
-      player_id = player.id
-
-      player_flop = @flops.find_by user_id: player_id
-      player_top = @tops.find_by user_id: player_id
-
-      @comments << [player_top, player_flop]
+      player_flop = @flops.find_by user_id: player.id
+      player_top = @tops.find_by user_id: player.id
+      @comments << [player_top, player_flop] if player_top.present? && player_flop.present?
     end
 
     @comments
+  end
+
+  def set_non_responders
+    @non_responders = []
+
+    @players.each do |player|
+      player_flop = @flops.find_by user_id: player.id
+      player_top = @tops.find_by user_id: player.id
+      @non_responders << player if player_top.nil? || player_flop.nil?
+    end
   end
 
   def set_players
@@ -128,7 +135,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:opponent_name, :date, :open)
+    params.require(:game).permit(:opponent_name, :date, :status)
   end
 
   # FINAL COUNT TOP and FLOP METHOD

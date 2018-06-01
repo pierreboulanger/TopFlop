@@ -23,7 +23,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :shirt_number
       t.string :field_position
-      t.references :team, foreign_key: true
 
       ## Confirmable
       # t.string   :confirmation_token

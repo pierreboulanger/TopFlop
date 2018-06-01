@@ -7,6 +7,7 @@ class CreateGames < ActiveRecord::Migration[5.0]
       t.string :score
       t.string :top
       t.string :flop
+      t.string :status
 
       t.timestamps
     end

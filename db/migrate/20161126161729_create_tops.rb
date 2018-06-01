@@ -4,6 +4,7 @@ class CreateTops < ActiveRecord::Migration[5.0]
       t.references :game, foreign_key: true
       t.references :user, foreign_key: true
       t.string :comment
+      t.string :topplayer
 
       t.timestamps
     end

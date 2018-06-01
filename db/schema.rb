@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205162223) do
+ActiveRecord::Schema.define(version: 20161130140146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20161205162223) do
     t.integer  "game_id"
     t.integer  "user_id"
     t.string   "comment"
+    t.string   "flopplayer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "flopplayer"
     t.index ["game_id"], name: "index_flops_on_game_id", using: :btree
     t.index ["user_id"], name: "index_flops_on_user_id", using: :btree
   end
@@ -33,10 +33,17 @@ ActiveRecord::Schema.define(version: 20161205162223) do
     t.string   "score"
     t.string   "top"
     t.string   "flop"
+    t.string   "status"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.string   "open"
     t.index ["team_id"], name: "index_games_on_team_id", using: :btree
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "team_id"
+    t.index ["team_id"], name: "index_players_on_team_id", using: :btree
+    t.index ["user_id"], name: "index_players_on_user_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
@@ -49,9 +56,9 @@ ActiveRecord::Schema.define(version: 20161205162223) do
     t.integer  "game_id"
     t.integer  "user_id"
     t.string   "comment"
+    t.string   "topplayer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "topplayer"
     t.index ["game_id"], name: "index_tops_on_game_id", using: :btree
     t.index ["user_id"], name: "index_tops_on_user_id", using: :btree
   end
@@ -70,7 +77,6 @@ ActiveRecord::Schema.define(version: 20161205162223) do
     t.string   "name"
     t.string   "shirt_number"
     t.string   "field_position"
-    t.integer  "team_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "provider"
@@ -80,13 +86,13 @@ ActiveRecord::Schema.define(version: 20161205162223) do
     t.datetime "token_expiry"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
   add_foreign_key "flops", "games"
   add_foreign_key "flops", "users"
   add_foreign_key "games", "teams"
+  add_foreign_key "players", "teams"
+  add_foreign_key "players", "users"
   add_foreign_key "tops", "games"
   add_foreign_key "tops", "users"
-  add_foreign_key "users", "teams"
 end
