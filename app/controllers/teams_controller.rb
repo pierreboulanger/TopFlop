@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
-  before_action :find_games, only: :show
-  before_action :set_player, :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, :set_player_after_team, :find_games, only: [:show, :edit, :update, :destroy]
+  before_action :set_player_before_team, only: [:new, :create]
 
   def index
     @teams = Team.all
@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if @team.save
-      redirect_to edit_team_user_path(@team, current_user)
+      redirect_to edit_player_path(@player)
     else
       flash[:notice] = @team.errors.messages
       render "new"
@@ -38,8 +38,12 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
   end
 
-  def set_player
+  def set_player_after_team
     @player = Player.find_by(user_id: current_user.id, team_id: @team.id)
+  end
+
+  def set_player_before_team
+    @player = Player.find_by(user_id: current_user.id)
   end
 
   def find_games
