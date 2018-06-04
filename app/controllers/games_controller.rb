@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :find_team, only: [:show, :new, :create, :update]
+  before_action :find_team,:set_player, only: [:show, :new, :create, :update]
   before_action :set_game, :set_players, only: [:show, :edit, :update, :destroy]
   before_action :set_comments, :set_non_responders, only: :show
 
@@ -91,6 +91,10 @@ class GamesController < ApplicationController
     @team = Team.find(params[:team_id])
   end
 
+  def set_player
+    @player = Player.find_by(user_id: current_user.id, team_id: @team.id)
+  end
+
   def set_game
     find_team
     @game = @team.games.find(params[:id])
@@ -131,7 +135,7 @@ class GamesController < ApplicationController
 
   def set_players
     find_team
-    @players = @team.users
+    @players = @team.players
   end
 
   def game_params

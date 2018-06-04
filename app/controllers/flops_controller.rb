@@ -1,5 +1,5 @@
 class FlopsController < ApplicationController
-  before_action :set_team, :set_game
+  before_action :set_team, :set_game, :set_player
   before_action :set_flop, only: [:edit, :update]
 
   def new
@@ -44,11 +44,15 @@ class FlopsController < ApplicationController
   private
 
   def set_team
-    @team = Team.find(current_user.team_id)
+    @team = Team.find(params[:team_id])
   end
 
   def set_game
-    @game = Game.find(params["game_id"])
+    @game = Game.find(params[:game_id])
+  end
+
+  def set_player
+    @player = Player.find_by(user_id: current_user.id, team_id: @team.id)
   end
 
   def flop_params

@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :find_games, only: :show
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_player, :set_team, only: [:show, :edit, :update, :destroy]
 
   def index
     @teams = Team.all
@@ -36,6 +36,10 @@ class TeamsController < ApplicationController
 
   def set_team
     @team = Team.find(params[:id])
+  end
+
+  def set_player
+    @player = Player.find_by(user_id: current_user.id, team_id: @team.id)
   end
 
   def find_games
