@@ -1,5 +1,5 @@
 class TopsController < ApplicationController
-  before_action :set_team, :set_game, :set_flop, :has_voted_top_player, :has_voted_flop_player
+  before_action :set_team, :set_game, :set_player, :set_flop, :has_voted_top_player, :has_voted_flop_player
   before_action :set_top_and_flop, only: [:edit, :update]
 
   def new
@@ -48,11 +48,15 @@ class TopsController < ApplicationController
   # PRELOAD METHODS
 
   def set_team
-    @team = Team.find(current_user.team_id)
+    @team = Team.find(params[:team_id])
   end
 
   def set_game
-    @game = Game.find(params["game_id"])
+    @game = Game.find(params[:game_id])
+  end
+
+  def set_player
+    @player = Player.find_by(user_id: current_user.id, team_id: @team.id)
   end
 
   def set_flop

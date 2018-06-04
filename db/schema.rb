@@ -33,10 +33,20 @@ ActiveRecord::Schema.define(version: 20161130140146) do
     t.string   "score"
     t.string   "top"
     t.string   "flop"
-    t.string   "open"
+    t.string   "status"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["team_id"], name: "index_games_on_team_id", using: :btree
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "team_id"
+    t.string  "name"
+    t.string  "shirt_number"
+    t.string  "field_position"
+    t.index ["team_id"], name: "index_players_on_team_id", using: :btree
+    t.index ["user_id"], name: "index_players_on_user_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
@@ -67,10 +77,6 @@ ActiveRecord::Schema.define(version: 20161130140146) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "name"
-    t.string   "shirt_number"
-    t.string   "field_position"
-    t.integer  "team_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "provider"
@@ -80,13 +86,13 @@ ActiveRecord::Schema.define(version: 20161130140146) do
     t.datetime "token_expiry"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
   add_foreign_key "flops", "games"
   add_foreign_key "flops", "users"
   add_foreign_key "games", "teams"
+  add_foreign_key "players", "teams"
+  add_foreign_key "players", "users"
   add_foreign_key "tops", "games"
   add_foreign_key "tops", "users"
-  add_foreign_key "users", "teams"
 end

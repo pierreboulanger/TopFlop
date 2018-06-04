@@ -3,11 +3,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   def after_sign_in_path_for(resource)
-    if current_user.name != nil
-      team_path(Team.find(current_user.team_id))
-    else
-      edit_team_user_path(Team.find(1), current_user)
-    end
+    @player = Player.new(user_id: current_user.id, team_id: 1, name: "Prénom Nom")
+    @player.save
+    edit_player_path(@player)
   end
 
 end

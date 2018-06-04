@@ -1,0 +1,12 @@
+<div class="text-center">
+  <h1><%= @player.name %></h1>
+  <h3>N° maillot : <%= @player.shirt_number %></h3>
+  <h3>Position : <%= @player.field_position %></h3>
+</div>
+
+<% if current_user.players.include?(@player) %>
+<%= link_to "Modifier mon Profil", edit_player_path(@player), class:"btn btn-primary btn-full-width" %>
+<% end %>
+<div class="back fixed-bottom">
+  <%= link_to "Back", request.referer, class:"btn btn-danger btn-full-width" %>
+</div>

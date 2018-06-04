@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, :set_team, :find_teams
+  before_action :set_user
 
   def show
   end
@@ -23,18 +23,6 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def set_team
-    if current_user.team_id != nil
-      @team = Team.find(current_user.team_id)
-    else
-      @team = Team.find(1)
-    end
-  end
-
-  def find_teams
-    @teams = Team.all
   end
 
   def user_params

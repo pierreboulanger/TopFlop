@@ -11,7 +11,7 @@
 
     <div class="top-form">
       <%= simple_form_for [@team, @game, @top], url: team_game_tops_path(@team, @game), remote: true do |f| %>
-        <%= f.input :topplayer, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @top.topplayer %>
+        <%= f.input :topplayer, collection: @team.players, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @top.topplayer %>
         <%= f.input :comment %>
         <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
         <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
@@ -36,7 +36,7 @@
 
   <div class="flop-form">
     <%= simple_form_for [@team, @game, @flop], url: team_game_flops_path(@team, @game), remote: true do |f| %>
-      <%= f.input :flopplayer, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @flop.flopplayer %>
+      <%= f.input :flopplayer, collection: @team.players, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @flop.flopplayer %>
       <%= f.input :comment %>
       <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
       <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
@@ -50,7 +50,6 @@
   <div class="flop-after-vote"></div>
 </div>
 
-<div class="fixed-bottom">
-  <%= link_to "Je confirme mon vote !", team_game_path(@team, @game), class:"button_submit btn btn-success btn-full-width", data: {confirm: "Avez-vous bien voté pour un top et pour un flop ?"} %>
+<div class="back fixed-bottom">
+  <%= link_to "Back", team_game_path(@team, @game), class:"btn btn-danger btn-full-width" %>
 </div>
-

@@ -1,15 +1,16 @@
 <div class="text-center">
   <h2>Complète ton Profil</h2>
 
-  <%= simple_form_for @user, :url => team_user_path(@team, @user) do |f| %>
+  <%= simple_form_for @player do |f| %>
     <%= f.input :name, label: "Ton surnom dans l'équipe ?" %>
     <%= f.input :shirt_number, label: "Ton n° de maillot habituel ?" %>
     <%= f.input :field_position, label: "Ta position fétiche ? (sur le terrain...)" %>
-    <%#= f.input :team_id, collection: @teams, label_method: :name, value_method: :id,label: "Ton équipe ?", include_blank: false, selected: @user.team_id %>
+    <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+    <%= f.input :team_id, collection: @teams, label_method: :name, value_method: :id,label: "Ton équipe ?", include_blank: false, selected: @player.team_id %>
     <p><%= link_to "Ton équipe n'est pas dans la liste ? Crée la maintenant !", new_team_path %></p>
     <%= f.button :submit, "Continue", class:"user_edit_submit btn btn-success btn-full-width" %>
   <% end %>
 </div>
 <div class="back fixed-bottom">
-  <%= link_to "Back", request.referer, class:"btn btn-danger btn-full-width" %>
+  <%= link_to "Back", :back, class:"btn btn-danger btn-full-width" %>
 </div>

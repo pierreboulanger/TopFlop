@@ -31,14 +31,14 @@
     <!-- THIRD TAB -->
     <div role="tabpanel" class="tab-pane fade" id="messages">
       <ul class="list-group">
-        <% @team.users.each do |user| %>
-          <%= link_to team_user_path(@team, user), class:"list-link" do %>
+        <% @team.players.each do |player| %>
+          <%= link_to player_path(player), class:"list-link" do %>
             <li class="list-group-item game-list">
               <div class="game-list-item game-title">
-                <% avatar_url = user.facebook_picture_url || "http://placehold.it/30x30" %>
+                <% avatar_url = player.user.facebook_picture_url || "http://placehold.it/30x30" %>
                 <%= image_tag avatar_url, class: "avatar" %>
                 <div class="player-list-name">
-                  <%= user.name.upcase %>
+                  <%= player.name.upcase %>
                 </div>
               </div>
             </li>
@@ -59,7 +59,7 @@
   <!-- Nav tabs -->
   <ul class="nav nav-pills home_tabs nav-justified" role="tablist">
     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">
-        <i class="fa fa-futbol-o" aria-hidden="true"></i>
+        <i class="fa fa-futbol" aria-hidden="true"></i>
         <p>Matchs</p>
     </a></li>
     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">

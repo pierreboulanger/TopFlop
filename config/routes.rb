@@ -4,11 +4,12 @@ Rails.application.routes.draw do
     controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: 'pages#home'
 
+  resources :players
+
   resources :teams do
-    resources :users
     resources :games do
-      resources :tops, only: [:new, :create, :edit, :update]
-      resources :flops, only: [:new, :create, :edit, :update]
+      resources :tops, only: [:index, :new, :create, :edit, :update]
+      resources :flops, only: [:index, :new, :create, :edit, :update]
     end
   end
 
