@@ -5,7 +5,7 @@
     <%= f.input :name, label: "Ton surnom dans l'équipe ?" %>
     <%= f.input :shirt_number, label: "Ton n° de maillot habituel ?" %>
     <%= f.input :field_position, label: "Ta position fétiche ? (sur le terrain...)" %>
-    <%= f.input :team_id, collection: @teams, label_method: :name, value_method: :id,label: "Ton équipe ?", include_blank: false, selected: @user.team_id %>
+    <%#= f.input :team_id, collection: @teams, label_method: :name, value_method: :id,label: "Ton équipe ?", include_blank: false, selected: @user.team_id %>
     <p><%= link_to "Ton équipe n'est pas dans la liste ? Crée la maintenant !", new_team_path %></p>
     <%= f.button :submit, "Continue", class:"user_edit_submit btn btn-success btn-full-width" %>
   <% end %>

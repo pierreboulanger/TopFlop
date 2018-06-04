@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 20161130140146) do
   create_table "players", force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
+    t.string  "name"
+    t.string  "shirt_number"
+    t.string  "field_position"
     t.index ["team_id"], name: "index_players_on_team_id", using: :btree
     t.index ["user_id"], name: "index_players_on_user_id", using: :btree
   end
@@ -74,9 +77,6 @@ ActiveRecord::Schema.define(version: 20161130140146) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "name"
-    t.string   "shirt_number"
-    t.string   "field_position"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "provider"
