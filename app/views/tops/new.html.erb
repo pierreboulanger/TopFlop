@@ -10,7 +10,7 @@
   <% else %>
 
     <div class="top-form">
-      <%= simple_form_for [@team, @game, @top], url: team_game_top_index_path(@team, @game), remote: true do |f| %>
+      <%= simple_form_for [@team, @game, @top], url: team_game_tops_path(@team, @game), remote: true do |f| %>
         <%= f.input :topplayer, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @top.topplayer %>
         <%= f.input :comment %>
         <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
@@ -35,7 +35,7 @@
   <% else %>
 
   <div class="flop-form">
-    <%= simple_form_for [@team, @game, @flop], url: team_game_flop_index_path(@team, @game), remote: true do |f| %>
+    <%= simple_form_for [@team, @game, @flop], url: team_game_flops_path(@team, @game), remote: true do |f| %>
       <%= f.input :flopplayer, collection: @team.users, label_method: :name, value_method: :id,label: "Joueur", include_blank: false, selected: @flop.flopplayer %>
       <%= f.input :comment %>
       <%= f.input :game_id, as: :hidden, input_html: {value: @game.id} %>
