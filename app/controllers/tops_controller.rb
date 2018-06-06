@@ -4,10 +4,12 @@ class TopsController < ApplicationController
 
   def new
     @top = Top.new
+    authorize @top
   end
 
   def create
     @top = Top.new(top_params)
+    authorize @top
 
     if @top.save
       respond_to do |format|
@@ -100,7 +102,9 @@ class TopsController < ApplicationController
 
   def set_top_and_flop
     @top = current_user.tops.last
+    authorize @top
     @flop = current_user.flops.last
+    authorize @flop
   end
 
 end
