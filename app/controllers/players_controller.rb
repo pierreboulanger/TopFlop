@@ -42,6 +42,7 @@ class PlayersController < ApplicationController
 
   def set_player
     @player = Player.find(params[:id])
+    authorize @player
   end
 
   def player_params

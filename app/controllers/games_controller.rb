@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :find_team,:set_player, only: [:show, :new, :create, :update]
+  before_action :set_team,:set_player, only: [:show, :new, :create, :update]
   before_action :set_game, :set_players, only: [:show, :edit, :update, :destroy]
   before_action :set_comments, :set_non_responders, only: :show
 
@@ -14,14 +14,12 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
+    authorize @game
   end
 
   def create
     @game = @team.games.build(game_params)
-    #does the same thing as :
-    # @game = Game.new
-    # @game.cocktail = @cocktail
-    # @game.save
+    authorize @game
 
     if @game.save
       redirect_to team_path(@team)
@@ -87,7 +85,7 @@ class GamesController < ApplicationController
 
   # PRELOAD METHODS
 
-  def find_team
+  def set_team
     @team = Team.find(params[:team_id])
   end
 
@@ -96,8 +94,9 @@ class GamesController < ApplicationController
   end
 
   def set_game
-    find_team
+    set_team
     @game = @team.games.find(params[:id])
+    authorize @game
   end
 
   def set_tops
@@ -115,8 +114,8 @@ class GamesController < ApplicationController
     set_flops
 
     @players.each do |player|
-      player_flop = @flops.find_by user_id: player.id
-      player_top = @tops.find_by user_id: player.id
+      player_flop = @flops.find_by user_id: player.user_id
+      player_top = @tops.find_by user_id: player.user_id
       @comments << [player_top, player_flop] if player_top.present? && player_flop.present?
     end
 
@@ -127,14 +126,14 @@ class GamesController < ApplicationController
     @non_responders = []
 
     @players.each do |player|
-      player_flop = @flops.find_by user_id: player.id
-      player_top = @tops.find_by user_id: player.id
+      player_flop = @flops.find_by user_id: player.user_id
+      player_top = @tops.find_by user_id: player.user_id
       @non_responders << player if player_top.nil? || player_flop.nil?
     end
   end
 
   def set_players
-    find_team
+    set_team
     @players = @team.players
   end
 

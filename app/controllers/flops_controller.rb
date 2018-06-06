@@ -4,10 +4,13 @@ class FlopsController < ApplicationController
 
   def new
     @flop = Flop.new
+    authorize @flop
   end
 
   def create
     @flop = Flop.new(flop_params)
+    authorize @flop
+
     if @flop.save
       respond_to do |format|
         flash[:notice] = "Merci pour ton vote !!"
@@ -61,5 +64,6 @@ class FlopsController < ApplicationController
 
   def set_flop
     @flop = current_user.flops.last
+    authorize @flop
   end
 end
