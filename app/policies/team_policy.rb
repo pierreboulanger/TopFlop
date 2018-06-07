@@ -15,4 +15,7 @@ class TeamPolicy < ApplicationPolicy
     end
   end
 
+  def update?
+    true
+  end
 end

@@ -15,7 +15,12 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :teams, only: [ :index, :show ]
+      resources :teams, only: [ :index, :show ] do
+        resources :games do
+          resources :tops, only: [:index, :new, :create, :edit, :update]
+          resources :flops, only: [:index, :new, :create, :edit, :update]
+        end
+      end
     end
   end
 
