@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
 
   def index
     @teams = Team.all
+    authorize @teams
   end
 
   def show
