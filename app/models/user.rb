@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :flops, dependent: :destroy
   has_many :tops, dependent: :destroy
-  has_many :players
+  has_many :players, dependent: :destroy
   has_many :teams, through: :players
 
   # Specify that he can signup with token for API
