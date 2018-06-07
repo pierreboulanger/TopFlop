@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :players
   has_many :teams, through: :players
 
+  # Specify that he can signup with token for API
+  acts_as_token_authenticatable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

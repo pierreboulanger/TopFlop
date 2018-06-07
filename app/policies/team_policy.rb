@@ -1,8 +1,12 @@
 class TeamPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope.all
     end
+  end
+
+  def index
+    true
   end
 
   def show?
@@ -11,4 +15,7 @@ class TeamPolicy < ApplicationPolicy
     end
   end
 
+  def update?
+    true
+  end
 end
